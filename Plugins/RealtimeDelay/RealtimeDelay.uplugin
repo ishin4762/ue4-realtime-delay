@@ -1,0 +1,24 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0",
+	"FriendlyName": "RealtimeDelay",
+	"Description": "Delay can be executed without being affected by time dilation or pause",
+	"Category": "Scripting",
+	"CreatedBy": "ishin",
+	"CreatedByURL": "https://twitter.com/ishin_mosquito",
+	"DocsURL": "https://github.com/ishin4762/ue4-realtime-delay",
+	"MarketplaceURL": "",
+	"SupportURL": "https://github.com/ishin4762/ue4-realtime-delay/issues",
+	"CanContainContent": true,
+	"IsBetaVersion": false,
+	"IsExperimentalVersion": false,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "RealtimeDelay",
+			"Type": "Runtime",
+			"LoadingPhase": "PreLoadingScreen"
+		}
+	]
+}
