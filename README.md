@@ -1,4 +1,7 @@
 # ue4-realtime-delay
+English Document: [README_en.md](README_en.md)
+
+## 概要
 * Unreal Engine 4/5でGlobal Time DilationやGame Pauseの影響を受けずにDelayを実行するプラグインです
 * Delayノードで実際に待つ秒数はGlobal Time Dilationの設定に依存して時間が伸びたり、Game Pause中は無限に待ってしまうなど、使いどころが難しい場面もあります
 * そういった場合に、このプラグインの提供するRealtime Delayノードを使えば、指定したDuration通りにDelayが行われます
