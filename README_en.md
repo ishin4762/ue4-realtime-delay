@@ -21,7 +21,7 @@ I believe it will work with most UE4 and UE5 versions as only basic functionalit
 1. Place a Realtime Delay node where you want to Delay as shown below
 ![](images/image.png)
 
-## Lincense
+## License
 MIT
 
 ## Update History
