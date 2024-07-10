@@ -12,9 +12,8 @@ English Document: [README_en.md](README_en.md)
 
 ## 動作環境
 
-* UE4.26.x
-* UE5.2.x
-
+* UE4.26 - UE4.27
+* UE5.0 - UE5.4
 基本的な機能しか使っていないので、大体のUE4/5のバージョンで動くと思います。稼働報告をくれると嬉しいです。
 
 ## 使い方
@@ -27,5 +26,7 @@ English Document: [README_en.md](README_en.md)
 MIT
 
 ## 更新履歴
+* 2024/07/11 v0.1.1 不具合修正
+  * Realtime Delay実行中にオブジェクトが破棄された場合にメモリアクセス違反になる可能性があるバグを修正
 * 2023/08/19 v0.1.0公開
 
