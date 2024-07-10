@@ -12,7 +12,7 @@ FRealtimeDelayAction::FRealtimeDelayAction(float Duration, const FLatentActionIn
 {
 }
 
-void FRealtimeDelayAction::UpdateOperation(float ElapsedTime)
+void FRealtimeDelayAction::UpdateOperation(float ElapsedTime, UObject* InObject)
 {
 	if (Available) {
 		TimeRemaining -= ElapsedTime;
@@ -22,6 +22,12 @@ void FRealtimeDelayAction::UpdateOperation(float ElapsedTime)
 			{
 				if (UObject* CallbackTarget = LatentInfo.CallbackTarget)
 				{
+					if (!IsValid(InObject) || InObject != CallbackTarget)
+					{
+						// Callback object has already been destroyed.
+						return;
+					}
+
 					if (UFunction* ExecutionFunction = CallbackTarget->FindFunction(LatentInfo.ExecutionFunction))
 					{
 						CallbackTarget->ProcessEvent(ExecutionFunction, &(LatentInfo.Linkage));
@@ -47,7 +53,8 @@ void URealtimeDelayActionManager::Tick(float DeltaTime)
 	// Execute
 	for (int32 Index = 0; Index < Actions.Num(); Index++)
 	{
-		Actions[Index]->UpdateOperation(DeltaTime);
+		int32 UUID = Actions[Index]->LatentInfo.UUID;
+		Actions[Index]->UpdateOperation(DeltaTime, CallbackObjects[UUID]);
 	}
 
 	// Delete Old event
@@ -64,8 +71,10 @@ void URealtimeDelayActionManager::Tick(float DeltaTime)
 			}
 		}
 		if (DeleteIndex >= 0) {
+			int32 UUID = Actions[DeleteIndex]->LatentInfo.UUID;
 			delete Actions[DeleteIndex];
 			Actions.RemoveAt(DeleteIndex);
+			CallbackObjects.Remove(UUID);
 		}
 	}
 }
@@ -89,4 +98,5 @@ FRealtimeDelayAction* URealtimeDelayActionManager::FindExistingAction(UObject* I
 void URealtimeDelayActionManager::AddDelayAction(float Duration, const FLatentActionInfo& LatentActionInfo)
 {
 	Actions.Add(new FRealtimeDelayAction(Duration, LatentActionInfo));
+	CallbackObjects.Add(LatentActionInfo.UUID, LatentActionInfo.CallbackTarget);
 }

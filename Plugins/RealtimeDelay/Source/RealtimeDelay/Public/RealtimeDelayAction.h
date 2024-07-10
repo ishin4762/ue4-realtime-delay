@@ -20,7 +20,7 @@ public:
 
 	FRealtimeDelayAction(float Duration, const FLatentActionInfo& LatentActionInfo);
 	virtual ~FRealtimeDelayAction() {}
-	void UpdateOperation(float ElapsedTime);
+	void UpdateOperation(float ElapsedTime, UObject* InObject);
 };
 
 /**
@@ -34,6 +34,9 @@ class URealtimeDelayActionManager : public UGameInstanceSubsystem, public FTicka
 protected:
 	TArray<FRealtimeDelayAction*> Actions;
 	static URealtimeDelayActionManager* _Instance;
+
+	UPROPERTY()
+	TMap<int32, UObject*> CallbackObjects;
 
 public:
 	virtual void Initialize(FSubsystemCollectionBase& Collection)
