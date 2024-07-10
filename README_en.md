@@ -10,8 +10,8 @@
 
 ## Supported Environment
 
-* UE4.26.x
-* UE5.2.x
+* UE4.26 - UE4.27
+* UE5.0 - UE5.4
 
 I believe it will work with most UE4 and UE5 versions as only basic functionality is used. It would be great if you could give me a running report.
 
@@ -25,4 +25,6 @@ I believe it will work with most UE4 and UE5 versions as only basic functionalit
 MIT
 
 ## Update History
+* 2024/07/11 v0.1.1 Fixes bugs
+  * Fixed a bug that could cause a memory access violation if an object was destroyed during Realtime Delay execution
 * 2023/08/19 v0.1.0 released
