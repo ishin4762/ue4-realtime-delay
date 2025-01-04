@@ -15,6 +15,7 @@ class FRealtimeDelayAction
 {
 public:
 	bool Available;
+	bool IsFirstOperation;
 	float TimeRemaining;
 	FLatentActionInfo LatentInfo;
 
