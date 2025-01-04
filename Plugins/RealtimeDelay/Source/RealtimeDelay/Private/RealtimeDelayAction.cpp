@@ -7,6 +7,7 @@ URealtimeDelayActionManager* URealtimeDelayActionManager::_Instance = nullptr;
 
 FRealtimeDelayAction::FRealtimeDelayAction(float Duration, const FLatentActionInfo& LatentActionInfo)
 	: Available(true)
+	, IsFirstOperation(true)
 	, TimeRemaining(Duration)
 	, LatentInfo(LatentActionInfo)
 {
@@ -14,9 +15,11 @@ FRealtimeDelayAction::FRealtimeDelayAction(float Duration, const FLatentActionIn
 
 void FRealtimeDelayAction::UpdateOperation(float ElapsedTime, UObject* InObject)
 {
-	if (Available) {
+	if (Available)
+	{
 		TimeRemaining -= ElapsedTime;
-		if (TimeRemaining <= 0.0f) {
+		if (TimeRemaining <= 0.0f && !IsFirstOperation)
+		{
 			Available = false;
 			if (LatentInfo.Linkage != INDEX_NONE)
 			{
@@ -43,6 +46,11 @@ void FRealtimeDelayAction::UpdateOperation(float ElapsedTime, UObject* InObject)
 					UE_LOG(LogScript, Warning, TEXT("FRealtimeDelayAction::UpdateOperation: CallbackTarget is None."));
 				}
 			}
+		}
+
+		if (IsFirstOperation)
+		{
+			IsFirstOperation = false;
 		}
 
 	}
